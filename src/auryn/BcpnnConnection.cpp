@@ -45,8 +45,6 @@ void BcpnnConnection::init(AurynFloat tau_pre,AurynFloat tau_z_pre, AurynFloat t
 
 	kinc_z_pre = refractory_period/tau_z_pre;
 	tr_z_pre = src->get_pre_trace(tau_z_pre);
-	// tr_z_pre->set_kinc(kinc_z_pre);
-	src->add_state_vector("tr_z_pre",tr_z_pre);
 
 	w->set_num_synapse_states(3);
 	zid_wij = 0;
@@ -63,18 +61,13 @@ void BcpnnConnection::init(AurynFloat tau_pre,AurynFloat tau_z_pre, AurynFloat t
 	// bcpnn_zj trace
 	kinc_z_post = refractory_period/tau_z_post;
 	tr_z_post = dst->get_post_trace(tau_z_post); 
-	// tr_z_post->set_kinc(kinc_z_post);
-	dst->add_state_vector("tr_z_post",tr_z_post);
 
 	// bcpnn_pj trace
 	tr_p_post = dst->get_post_state_trace(tr_z_post,tau_p);
-	// tr_p_post->set_kinc(kinc_p);
-	dst->add_state_vector("tr_p_post",tr_p_post);
 	
 	// bcpnn_pij trace
 
 	bj_vectordata = dst->get_state_vector("w")->data;
-	dst->add_state_vector("bj_post",dst->get_state_vector("w"));
 	wij_vector = w->get_state_vector(zid_wij);
 	pij_vector = w->get_state_vector(zid_pij);
 	pi_vector = w->get_state_vector(zid_pi);
@@ -138,11 +131,6 @@ void BcpnnConnection::free()
 		<< " freeing ...";
 	auryn::logger->msg(oss.str(),VERBOSE);
 	auryn::logger->msg("BcpnnConnection:: Freeing poststatetraces",VERBOSE);
-	src->remove_state_vector("tr_z_pre");
-	dst->remove_state_vector("tr_z_post");
-	dst->remove_state_vector("tr_p_post");
-	dst->remove_state_vector("bj_post");
-
 }
 
 BcpnnConnection::BcpnnConnection(SpikingGroup * source, NeuronGroup * destination, TransmitterType transmitter) :
