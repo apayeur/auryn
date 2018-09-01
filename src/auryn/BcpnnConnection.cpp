@@ -45,7 +45,7 @@ void BcpnnConnection::init(AurynFloat tau_pre,AurynFloat tau_z_pre, AurynFloat t
 
 	kinc_z_pre = refractory_period/tau_z_pre;
 	tr_z_pre = src->get_pre_trace(tau_z_pre);
-	tr_z_pre->set_kinc(kinc_z_pre);
+	// tr_z_pre->set_kinc(kinc_z_pre);
 	src->add_state_vector("tr_z_pre",tr_z_pre);
 
 	w->set_num_synapse_states(3);
@@ -63,12 +63,12 @@ void BcpnnConnection::init(AurynFloat tau_pre,AurynFloat tau_z_pre, AurynFloat t
 	// bcpnn_zj trace
 	kinc_z_post = refractory_period/tau_z_post;
 	tr_z_post = dst->get_post_trace(tau_z_post); 
-	tr_z_post->set_kinc(kinc_z_post);
+	// tr_z_post->set_kinc(kinc_z_post);
 	dst->add_state_vector("tr_z_post",tr_z_post);
 
 	// bcpnn_pj trace
 	tr_p_post = dst->get_post_state_trace(tr_z_post,tau_p);
-	tr_p_post->set_kinc(kinc_p);
+	// tr_p_post->set_kinc(kinc_p);
 	dst->add_state_vector("tr_p_post",tr_p_post);
 	
 	// bcpnn_pij trace
@@ -216,7 +216,7 @@ void BcpnnConnection::evolve() {
 
 		const NeuronID gi = dst->rank2global(li); // id translation for MPI
 
-		AurynWeight pj = tr_p_post->get(li);
+		AurynWeight pj = tr_p_post->get(li)*kinc_p;
 
 		/* Updating postneuron bias bj */
 		bj_vectordata[li] = bgain * std::log(pj + eps);
@@ -225,8 +225,8 @@ void BcpnnConnection::evolve() {
 
 			AurynWeight *weight = bkw->get_data(c); 
 			const AurynLong didx = w->data_ptr_to_didx(weight); // index of element in data array
-			const AurynState zi = tr_z_pre->get(*c);
-			const AurynState zj = tr_z_post->get(li);
+			const AurynState zi = tr_z_pre->get(*c)*kinc_z_pre;
+			const AurynState zj = tr_z_post->get(li)*kinc_z_post;
 			AurynState de = kinc_p * zi* zj; // our multiplication
 			pi_vector->add_specific(didx,kinc_p*zi);
 			pij_vector->add_specific(didx,de);
