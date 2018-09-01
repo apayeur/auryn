@@ -36,13 +36,11 @@
 
 namespace auryn {
 
-/*! \brief Implements a prototype of pair-based additive Bcpnn as described in Tully et al. 2014, Frontiers in Synaptic Neuroscience.
+/*! \brief Implements triplet STDP with metaplasticity as described by Pfister and Gerstner 2006.
  *
- * Contributed by Anders Lansner, KTH, 2018
+ * This is the connection used to simulate large plastic recurrent networks with the BCPNN learning rule.
  *
- * \todo This prototype connection still needs testing
- *
- * */
+ */
 class BcpnnConnection : public DuplexConnection
 {
 
@@ -71,12 +69,14 @@ protected:
 	AurynFloat kinc_z_pre; 
 	AurynFloat kinc_z_post; 
 	AurynFloat kinc_p; 
+	AurynFloat kdec_p; 
 
-	AurynFloat p_decay;
+	int zid_wij,zid_pi,zid_pij;
 
-	int zid_wij,zid_pij;
-
-	AurynState *bias_variable;
+	AurynState *bj_vectordata;
+	AurynVector<float,long unsigned int> *wij_vector;
+	AurynVector<float,long unsigned int> *pij_vector;
+	AurynVector<float,long unsigned int> *pi_vector;
 
 	NeuronID * fwd_ind; 
 	AurynWeight * fwd_data;
@@ -96,7 +96,6 @@ public:
 	/* Definitions of presynaptic traces */
 	Trace * tr_pre;
 	Trace * tr_z_pre;
-	Trace * tr_p_pre;
 
 	/* Definitions of postsynaptic traces */
 	Trace * tr_post;
