@@ -381,7 +381,7 @@ void SparseConnection::connect_block_random(AurynWeight weight,
 	}
 
 	if ( weight < get_min_weight() ) {
-	    auryn::logger->msg("Weight smaller than minimal weight. Updating minimal weight and proceeding.",DEBUG); 
+	    auryn::logger->msg("Weight smaller than minimal weight. Updating minimal weight and proceeding.",VERBOSE); 
 		set_min_weight(weight);
 	}
 
@@ -512,7 +512,7 @@ void SparseConnection::finalize()
 		{
 			std::stringstream oss2;
 			oss2 << get_log_name() <<"Wasteful fill level (" << w->get_fill_level() << ")! Make sure everything is in order!";
-			auryn::logger->msg(oss2.str(),DEBUG);
+			auryn::logger->msg(oss2.str(),VERBOSE);
 		}
 	}
 }
