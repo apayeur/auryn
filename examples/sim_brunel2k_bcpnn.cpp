@@ -292,7 +292,6 @@ int main(int ac,char *av[]) {
 	    std::cerr << "N:o non-zero ee weights: " << con_ee->get_nonzero()*sys->mpi_size() << std::endl;
 		if (with_bcpnn)
 			std::cerr << "N:o non-zero ee_bcpnn weights: " << con_ee_bcpnn->get_nonzero()*sys->mpi_size() << std::endl;
-	    std::cerr << "Maximum send buffer allocated: " << sys->get_max_send_buffer_size() << std::endl;
 	    std::cout << "Execution time: " << MPI_Wtime() - start << std::endl; // ALa added
 	    MPI_Barrier(MPI::COMM_WORLD);
 	} else MPI_Barrier(MPI::COMM_WORLD);
