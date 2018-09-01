@@ -156,7 +156,7 @@ System::System(mpi::communicator * communicator)
 	if ( mpi_size() > 0 && (mpi_size() & (mpi_size()-1)) ) {
 		oss.str("");
 		oss << "WARNING! The number of processes is not a power of two. "
-			<< "This causes impaired performance or even crashes "
+			<< "This could cause impaired performance or even crashes "
 			<< "in some MPI implementations.";
 		auryn::logger->msg(oss.str(),WARNING,true);
 	}
