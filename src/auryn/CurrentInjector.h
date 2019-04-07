@@ -50,9 +50,6 @@ class CurrentInjector : protected Device
 {
 private:
 
-	/*! Vector storing all the current values */
-	AurynVectorFloat * currents;
-
 	/*! Target membrane */
 	AurynVectorFloat * target_vector;
 
@@ -65,6 +62,8 @@ private:
 	AurynFloat alpha;
 
 protected:
+	/*! Vector storing all the current values */
+        AurynVectorFloat * currents;
 
 	/*! The target NeuronGroup */
 	NeuronGroup * dst;

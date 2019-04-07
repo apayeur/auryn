@@ -49,7 +49,7 @@ namespace auryn {
 
 	class NaudGroup : public NeuronGroup
 	{
-	private:
+	protected:
 		AurynStateVector * state_soma; /*!< somatic voltage */
 		AurynStateVector * state_dend; /*!< dendritic voltage */
 		AurynStateVector * state_wsoma; /*!< adaptation variable */
