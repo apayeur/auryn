@@ -49,6 +49,9 @@ namespace auryn {
 
 	class NaudGroup : public NeuronGroup
 	{
+    private:
+        void init();
+        
 	protected:
 		AurynStateVector * state_soma; /*!< somatic voltage */
 		AurynStateVector * state_dend; /*!< dendritic voltage */
@@ -80,7 +83,6 @@ namespace auryn {
 		AurynFloat scale_ampa, scale_gaba, mul_thr; 
 		AurynFloat scale_wsoma; 
 
-		void init();
 		void free();
 		void precalculate_constants();
 		void integrate_membrane();
