@@ -104,12 +104,31 @@ namespace auryn {
 		/*! \brief Sets the membrane time constant */
 		void set_tau_mem(AurynFloat taum);
 
+        /*! \brief Sets the threshold time constant */
+        void set_tau_thr(AurynFloat tau);
+
+        /*! \brief Sets gd */
+        void set_gd(AurynFloat gd_val);
+        
+        /*! \brief Sets gs */
+        void set_gs(AurynFloat gs_val);
+        
+        /*! \brief Sets zeta */
+        void set_zeta(AurynFloat zeta_val);
+
+        
 		/*! \brief Returns the membrane time constant */
 		AurynFloat get_tau_mem();
 
-		/*! \brief Sets the membrane time constant */
-		void set_tau_thr(AurynFloat tau);
+        /*! \brief Returns the membrane capacitance */
+        AurynFloat get_Cs();
+        AurynFloat get_Cd();
+        
+        /*! \brief Returns the leak conductance */
+        AurynFloat get_g_leak_soma();
+        AurynFloat get_g_leak_dend();
 
+        
 		void clear();
 
 		/*! Internally used evolve function. Called by System. */

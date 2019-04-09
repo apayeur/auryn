@@ -48,13 +48,14 @@ namespace auryn {
 class STPConnection : public SparseConnection
 {
 private:
+    void init();
+    void free();
+
+protected:
 	// STP parameters (maybe this should all move to a container)
 	auryn_vector_float * state_x;
 	auryn_vector_float * state_u;
 	auryn_vector_float * state_temp;
-
-	void init();
-	void free();
 
 public:
 	double tau_d;

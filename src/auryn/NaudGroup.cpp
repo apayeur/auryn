@@ -251,10 +251,44 @@ void NaudGroup::evolve()
 	check_thresholds();
 }
 
-
 void NaudGroup::set_tau_thr(AurynFloat tau)
 {
 	tau_thr = tau;
 	precalculate_constants();
 }
 
+void NaudGroup::set_gd(AurynFloat gd_val)
+{
+    gd = gd_val;
+    precalculate_constants();
+}
+
+void NaudGroup::set_gs(AurynFloat gs_val)
+{
+    gs = gs_val;
+    precalculate_constants();
+}
+
+void NaudGroup::set_zeta(AurynFloat zeta_val)
+{
+    zeta = zeta_val;
+    precalculate_constants();
+}
+
+AurynFloat NaudGroup::get_Cs()
+{
+    return Cs;
+}
+
+AurynFloat NaudGroup::get_Cd()
+{
+    return Cd;
+}
+
+AurynFloat NaudGroup::get_g_leak_soma(){
+    return Cs/tau_soma;
+}
+
+AurynFloat NaudGroup::get_g_leak_dend(){
+    return Cd/tau_dend;
+}
