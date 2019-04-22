@@ -267,6 +267,11 @@ AurynFloat AdExGroup::get_tau_gaba()
     return tau_gaba;
 }
 
+AurynFloat AdExGroup::get_c_mem()
+{
+    return c_mem;
+}
+
 void AdExGroup::set_refractory_period(AurynDouble t)
 {
     refractory_time = (unsigned short) (t/auryn_timestep);

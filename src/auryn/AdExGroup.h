@@ -138,6 +138,9 @@ public:
 
     /*! Gets the exponential time constant for the GABA channel */
     AurynFloat get_tau_gaba();
+    
+    /*! Gets the membrane capacitance */
+    AurynFloat get_c_mem();
 
     /*! Resets all neurons to defined and identical initial state. */
     void clear();
