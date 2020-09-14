@@ -13,3 +13,5 @@ docs/*
 # Ignore stuff in the build dir
 build/*
 
+# Ignore DStore
+.DS_Store

@@ -201,7 +201,8 @@ void NaudGroup::integrate_membrane()
 
 			// decrease post spike counter
 			post_spike_countdown->add_specific(i,-1);
-		} }
+		}
+    }
 
 	// synaptic input 
     state_soma->saxpy(mul_soma, syn_current_exc_soma); 
